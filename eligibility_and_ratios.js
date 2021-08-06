@@ -13,7 +13,28 @@
 
            // KEY FINANCIAL INDICATOR
 
+          
+            var netrevenue1 = parseInt(localStorage.getItem("ne_rev"));
+            var netrevenue2 =  parseInt(localStorage.getItem("ne_rev1"));
 
+            Turnover.innerHTML  = netrevenue1;
+            Turnover1.innerHTML  = netrevenue2;
+
+            var turnover_yoyo = ((netrevenue2 - netrevenue1)/ netrevenue1 )*100;
+             
+            var pat1 =  parseInt(localStorage.getItem("pat_1"));
+            var pat2 = parseInt(localStorage.getItem("pat_2"));
+
+            var dep_1 = parseInt(localStorage.getItem("dep1"));
+            var dep_2 = parseInt(localStorage.getItem("dep"));
+
+            var Operating_Profit = Math.round((pat1 + int_1 + dep_1));
+            var Operating_Profit1 = Math.round(pat2 + int_2 + dep_2);
+
+           var yoyo_growth = Math.round(((Operating_Profit1-Operating_Profit)/Operating_Profit)*100)
+
+
+          
           //Turnover  - YoY %
           turnover_yoy.innerHTML  = turnover_yoyo.toFixed(0)+"%";         
            
