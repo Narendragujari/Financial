@@ -3,11 +3,6 @@
 
 
  
-  document.querySelectorAll('.form_apply').forEach(item => {
-  item.addEventListener('input', event => {
-    oblig();
-  })
-});
              
 
 
@@ -16,9 +11,6 @@
           
             var netrevenue1 = parseInt(localStorage.getItem("ne_rev"));
             var netrevenue2 =  parseInt(localStorage.getItem("ne_rev1"));
-
-            Turnover.innerHTML  = netrevenue1;
-            Turnover1.innerHTML  = netrevenue2;
 
             var turnover_yoyo = ((netrevenue2 - netrevenue1)/ netrevenue1 )*100;
              
