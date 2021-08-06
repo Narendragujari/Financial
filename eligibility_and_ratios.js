@@ -19,6 +19,10 @@
 
             var dep_1 = parseInt(localStorage.getItem("dep1"));
             var dep_2 = parseInt(localStorage.getItem("dep"));
+   
+            var int_1 = parseInt(localStorage.getItem("int1"));
+            var int_2 = parseInt(localStorage.getItem("int2"));
+
 
             var Operating_Profit = Math.round((pat1 + int_1 + dep_1));
             var Operating_Profit1 = Math.round(pat2 + int_2 + dep_2);
