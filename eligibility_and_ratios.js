@@ -1,5 +1,108 @@
 
-  
+   
+  document.querySelectorAll('.form_apply').forEach(item => {
+  item.addEventListener('input', event => {
+    oblig();
+  })
+});
+             
+
+
+
+
+
+              
+
+
+
+
+
+             //Eligibility Calculation
+            
+            var netrevenue1 = parseInt(localStorage.getItem("ne_rev"));
+            var netrevenue2 =  parseInt(localStorage.getItem("ne_rev1"));
+
+            Turnover.innerHTML  = netrevenue1;
+            Turnover1.innerHTML  = netrevenue2;
+
+            var turnover_yoyo = ((netrevenue2 - netrevenue1)/ netrevenue1 )*100;
+
+            year_on_year.innerHTML  = turnover_yoyo.toFixed(0)+"%";
+
+            var pat1 =  parseInt(localStorage.getItem("pat_1"));
+            var pat2 = parseInt(localStorage.getItem("pat_2"));
+
+            npat5.innerHTML  = pat1;
+            npat6.innerHTML  = pat2;
+
+            var int_1 = parseInt(localStorage.getItem("int1"));
+            var int_2 = parseInt(localStorage.getItem("int2"));
+
+            Interest.innerHTML  = int_1;
+            Interest1.innerHTML  = int_2;
+
+            var dep_1 = parseInt(localStorage.getItem("dep1"));
+            var dep_2 = parseInt(localStorage.getItem("dep"));
+
+            Depreciation.innerHTML  = dep_1;
+            Depreciation1.innerHTML  = dep_2;
+
+            var Operating_Profit = Math.round((pat1 + int_1 + dep_1));
+            var Operating_Profit1 = Math.round(pat2 + int_2 + dep_2);
+
+            Operating_Profit3.innerHTML  = Operating_Profit;
+            Operating_Profit4.innerHTML  = Operating_Profit1;
+
+           var yoyo_growth = Math.round(((Operating_Profit1-Operating_Profit)/Operating_Profit)*100)
+           yoy_growth.innerHTML  = yoyo_growth + "%";
+
+
+           var income_conis;
+
+           if (yoyo_growth>40) {
+
+            income_conis = Math.round(Operating_Profit * 1.4);
+
+           }
+
+          
+          else  
+
+
+           {
+
+            
+           income_conis = Operating_Profit1;
+
+
+           }
+
+           operating_Profit_cons.innerHTML  = income_conis;
+
+           var monthly_income = Math.round(income_conis / 12);
+           monthly_Income1.innerHTML  = monthly_income;
+
+
+           var dscr_consider;
+
+           if (turnover_yoyo<0) {
+
+            dscr_consider = 1;
+
+           }
+
+           else {
+
+            dscr_consider = .8;
+
+           }
+
+           applicable_dscr.innerHTML  = dscr_consider;
+
+           var gross_eligible_income = Math.round(monthly_income / dscr_consider);
+
+           gross_Eligible_Income1.innerHTML  = gross_eligible_income;
+
 
 
  
@@ -208,5 +311,37 @@
           dscr.innerHTML  = dscr1.toFixed(2);
           dscr3.innerHTML  = dscr12.toFixed(2);
 
+function oblig(){
+
+    var income = parseInt(document.getElementById("gross_Eligible_Income1").value || 0);
+    var oblig = parseInt(document.getElementById("obligation1").value || 0);
+   
+    net_eligible_income1 = Math.round(gross_eligible_income - oblig);
+    Net_Eligible_Income.innerHTML  = net_eligible_income1;
+
+    var principal = 100000;
+    var interest = document.getElementById('rate').value / 1200;
+    var payments = document.getElementById('tenure').value;
+
+
+    // Now compute the monthly payment figure, using esoteric math.
+    var monthly = Math.round(principal * interest / (1-(Math.pow(1/(1 + interest), payments)))*100)/100;
+
+var eligibility;
+
+if (payments<=0) {
+
+   eligibility = "";
+
+}
+
+else 
+     {
+
+     eligibility = Math.round((net_eligible_income1/monthly)*100000);
+}
+
+   Loan_Eligibility_dscr.innerHTML  = eligibility;
+}
 
 
